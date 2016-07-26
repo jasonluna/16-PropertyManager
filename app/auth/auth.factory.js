@@ -10,13 +10,82 @@
     /* @ngInject */
     function AuthFactory($http, $q, localStorageService) {
         var service = {
-            registerUser: registerUser
+            registerUser: registerUser,
+            loginUser: loginUser,
+            logoutUser: logoutUser
         };
         return service;
 
         ////////////////
 
-        function registerUser() {
+        function registerUser(userEmail, password, confirmPassword, firstName, lastName, phoneNumber) {
+
+            var defer = $q.defer();
+
+            if (password !== confirmPassword){
+                defer.reject("Password must match Confirm Password.");
+
+                return defer.promise;
+            }
+
+            var newUser = {emailAddress: userEmail, password: password, confirmPassword: confirmPassword, firstName: firstName, lastName: lastName, phoneNumber: phoneNumber};
+
+            $http({
+                    method: 'POST',
+                    url: 'http://localhost:51146/api/accounts/register',
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8'
+                    },
+                    data: newUser
+                }).then(function(response) {
+                        if (response.status === 200) {
+                            defer.resolve(response);
+                        } else {
+                            defer.reject("No data found!");
+                        }
+                    },
+                    function(error) {
+                        defer.reject("Email Address has already been used!");
+                    });
+
+                return defer.promise;
+        }
+
+        function loginUser(loginEmail, loginPassword){
+            var defer = $q.defer();
+
+            var data = "grant_type=password&username=" + loginEmail + "&password=" + loginPassword;
+
+            $http({
+                    method: 'POST',
+                    url: 'http://localhost:51146/api/token',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    data: data
+                }).then(function(response) {
+                        if (response.status === 200) {
+
+                            localStorageService.set('access_token', response.data.access_token);
+                            localStorageService.set('username', loginEmail);
+
+                            defer.resolve(response);
+                        } else {
+                            defer.reject("No data found!");
+                        }
+                    },
+                    function(error) {
+                        defer.reject(error);
+                    });
+
+                return defer.promise;
+        }
+
+        //Defining method for logging users out by clearing out access token from local storage
+        
+        function logoutUser(){
+            localStorageService.clearAll();
+
         }
     }
 })();

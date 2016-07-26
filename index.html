@@ -54,7 +54,7 @@
                             <label class="sr-only" for="Password">Password</label>
                             <input ng-model="vm.password" type="password" class="form-control" id="Password" placeholder="Password" required />
                         </div>
-                        <button ng-click="vm.login(vm.username, vm.password)" type="submit" class="btn btn-success">Sign in</button>
+                        <button ng-click="vm.loginUser(vm.username, vm.password)" type="submit" class="btn btn-success">Sign in</button>
                     </form>
                 </div>
             </div>
@@ -75,8 +75,9 @@
     <script src="/app/app.js"></script>
     <script src="/app/auth/auth.controller.js"></script>
     <script src="/app/auth/auth.factory.js"></script>
+    <script src="/app/auth/auth.interceptor.js"></script>
     <!-- endinject -->
 </body>
 
 </html>
-<!-- <a href="http://www.10news.com" class="btn btn-primary">Click Me!</a> -->
+

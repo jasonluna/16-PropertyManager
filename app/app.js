@@ -5,7 +5,7 @@
 
     app.config(function(localStorageServiceProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
 
-        // $httpProvider.interceptors.push('AuthorizationInterceptor');
+        $httpProvider.interceptors.push('AuthInterceptor');
 
         // localStorageServiceProvider
         //     .setPrefix('app')
@@ -30,6 +30,14 @@
             templateUrl: '../partials/partial-registration.html',
             controller: 'AuthController',
             controllerAs: 'vm'
+        })
+
+    	// MULTIPLE ADDITIONAL STATES AND NESTED VIEWS =========================
+	    	.state('dashboard', {
+	        url: '/dashboard',
+	        templateUrl: '../partials/partial-dashboard.html',
+	        controller: 'AuthController',
+	        controllerAs: 'vm'
         })
 
     });

@@ -15,14 +15,19 @@ namespace PropertyManagerAPI.Models
             public string UserId { get; set; }
 
             //Property fields
-            public string Text { get; set; }
-            public DateTime CreatedDate { get; set; }
-            public int LikedCount { get; set; }
+            public string City { get; set; }
+            public string Zip { get; set; }
+            public string Street { get; set; }
+            public int Squareft { get; set; }
+            public int Bedrooms { get; set; }
+            public int Bathrooms { get; set; }
+            public double Rent { get; set; }
+            public string Description { get; set; }
+
 
             //Entity relationships
-            public virtual ICollection<Comment> Comments { get; set; }
-            public virtual Property User { get; set; }
-            public virtual ICollection<Like> Likes { get; set; }
+            public virtual PropertyManagerUser User { get; set; }
+            
 
         }
     }
