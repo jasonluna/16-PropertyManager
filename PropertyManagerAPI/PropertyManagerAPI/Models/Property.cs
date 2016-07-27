@@ -23,6 +23,7 @@ namespace PropertyManagerAPI.Models
             public int Bathrooms { get; set; }
             public double Rent { get; set; }
             public string Description { get; set; }
+            
 
 
             //Entity relationships

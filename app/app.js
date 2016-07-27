@@ -36,7 +36,7 @@
 	    	.state('dashboard', {
 	        url: '/dashboard',
 	        templateUrl: '../partials/partial-dashboard.html',
-	        controller: 'AuthController',
+	        controller: 'PropertyController',
 	        controllerAs: 'vm'
         })
 

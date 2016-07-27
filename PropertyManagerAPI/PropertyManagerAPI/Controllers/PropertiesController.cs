@@ -71,6 +71,19 @@ namespace PropertyManagerAPI.Controllers
         [ResponseType(typeof(Property))]
         public IHttpActionResult PostProperty(Property property)
         {
+            string username = User.Identity.Name;
+            var user = db.Users.FirstOrDefault(u => u.UserName == username);
+
+            //Add userId if username is found
+            if (user.Id == null)
+            {
+                Unauthorized();
+            }
+            else
+            {
+                property.UserId = user.Id;
+            }
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
