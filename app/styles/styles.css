@@ -6,6 +6,10 @@ h1 {
     text-align: center;
 }
 
+.searchBar{
+    margin-top: 5%;
+
+}
 
 /* Remove the navbar's default margin-bottom and rounded borders */
 
@@ -129,7 +133,40 @@ footer {
     }
 }
 
-.propertyDisplay{
+/*.propertyDisplay{
 
-    float:right;
+    margin-left: 0;
+
+}*/
+
+.searchResult{
+    text-align: center;
+}
+.resultsContainer{
+    margin-top: 5%;
+}
+
+/*.panel{
+    width: 40%;
+    display: inline;
+}*/
+.propertyPic{
+    height: 200px;
+    width: 250px;
+    max-width: 100%;
+
+}
+
+.backpic{
+    background-image: url(../../img/house-images-17.jpg);
+    background-size: cover;
+}
+
+.mainH{
+    color: white;
+    font: bolder;
+}
+
+h4 {
+    color: white;
 }

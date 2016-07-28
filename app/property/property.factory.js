@@ -15,7 +15,9 @@
             getProperties: getProperties,
             addProperty: addProperty,
             deleteProperty: deleteProperty,
-            editProperty: editProperty
+            editProperty: editProperty,
+            searchProperties: searchProperties,
+            searchPropertiesByUser: searchPropertiesByUser
         };
         return service;
 
@@ -47,7 +49,7 @@
 
             var defer = $q.defer();
 
-            var newProperty = {city: city, zip: zip, squareft: squareft, bedrooms: bedrooms, bathrooms: bathrooms, rent: rent, description: description};
+            var newProperty = {city: city, street: street, zip: zip, squareft: squareft, bedrooms: bedrooms, bathrooms: bathrooms, rent: rent, description: description};
 
             $http({
                     method: 'POST',
@@ -118,6 +120,55 @@
                 return defer.promise;
 
         }
+
+        function searchProperties(searchQuery){
+        	var defer = $q.defer();
+
+            $http({
+                    method: 'POST',
+                    url: url + 'search', 
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8'
+                    },
+                    data: searchQuery
+                }).then(function(response) {
+                        if (typeof response.data === 'object') {
+                            defer.resolve(response);
+                        } else {
+                            defer.reject("No data found!");
+                        }
+                    },
+                    function(error) {
+                        defer.reject(error);
+                    });
+
+                return defer.promise;
+        }
+
+        function searchPropertiesByUser(searchQuery){
+            var defer = $q.defer();
+        
+            $http({
+                    method: 'POST',
+                    url: url + 'search/username', 
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8'
+                    },
+                    data: searchQuery
+                }).then(function(response) {
+                        if (typeof response.data === 'object') {
+                            defer.resolve(response);
+                        } else {
+                            defer.reject("No data found!");
+                        }
+                    },
+                    function(error) {
+                        defer.reject(error);
+                    });
+
+                return defer.promise;
+        }
+
 
     }
 })();

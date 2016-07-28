@@ -8,12 +8,13 @@ using PropertyManagerAPI.Infrastructure;
 using PropertyManagerAPI.Models;
 
 namespace PropertyManagerAPI.Controllers
-{
+{  
     public class PropertiesController : ApiController
     {
         private DataContext db = new DataContext();
 
         // GET: api/Properties
+        
         public IQueryable<Property> GetProperties()
         {
             return db.Properties;
@@ -30,6 +31,25 @@ namespace PropertyManagerAPI.Controllers
             }
 
             return Ok(property);
+        }
+
+        //POST: api/Properties/City
+        [Route("api/properties/search")]
+        public IQueryable<Property> SearchProperties(SearchQuery search)
+        {
+            IQueryable<Property> properties = db.Properties.Where(p => p.City == search.City);
+            return properties;
+        }
+
+        //POST: api/Properties/search/username
+        [Route("api/properties/search/username")]
+        public IQueryable<Property> SearchPropertiesByUser(SearchQuery search)
+        {
+            string username = search.UserName;
+            var user = db.Users.FirstOrDefault(u => u.UserName == username);
+            
+            IQueryable<Property> properties = db.Properties.Where(p => p.UserId == user.Id);
+            return properties;
         }
 
         // PUT: api/Properties/5

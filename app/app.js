@@ -20,24 +20,30 @@
             .state('home', {
             url: '/home',
             templateUrl: '../partials/partial-home.html',
-            controller: 'AuthController',
+            controller: 'PropertyController',
             controllerAs: 'vm'
         })
+
+        .state('home.result', {
+                url: '/home.result/:cityName',
+                templateUrl: '../partials/partial-home.result.html',
+                controller: 'PropertyController',
+                controllerAs: 'vm'
+            })
+            // MULTIPLE ADDITIONAL STATES AND NESTED VIEWS =========================
+            .state('registration', {
+                url: '/registration',
+                templateUrl: '../partials/partial-registration.html',
+                controller: 'AuthController',
+                controllerAs: 'vm'
+            })
 
         // MULTIPLE ADDITIONAL STATES AND NESTED VIEWS =========================
-        	.state('registration', {
-            url: '/registration',
-            templateUrl: '../partials/partial-registration.html',
-            controller: 'AuthController',
+        .state('dashboard', {
+            url: '/dashboard',
+            templateUrl: '../partials/partial-dashboard.html',
+            controller: 'PropertyController',
             controllerAs: 'vm'
-        })
-
-    	// MULTIPLE ADDITIONAL STATES AND NESTED VIEWS =========================
-	    	.state('dashboard', {
-	        url: '/dashboard',
-	        templateUrl: '../partials/partial-dashboard.html',
-	        controller: 'PropertyController',
-	        controllerAs: 'vm'
         })
 
     });

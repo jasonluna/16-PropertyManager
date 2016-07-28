@@ -25,13 +25,13 @@
                 <button class="btn btn-primary" ng-click="vm.addProperty(vm.city,vm.zip,vm.street,vm.squareft,vm.bedrooms,vm.bathrooms,vm.rent,vm.description)">Add Property</button>
             </div>
         </div>
-        <div class="col-sm-8 text-left" >
-            <div class="container-fluid" ng-repeat="data in vm.properties">
+        <div class="col-sm-10 text-left" >
+            <div class="container-fluid col-sm-4" ng-repeat="data in vm.properties">
                 
                 <div class="row">
-                    <div class="panel panel-default">
+                    <div class="panel panel-default NewPanel searchResult">
                         <div class="panel-body propertyDisplay" >
-                            <img ng-src="../img/{{data.PropertyId}}.jpg">
+                            <img ng-src="../img/{{data.PropertyId}}.jpg" class="propertyPic">
                             <br>
 
                             <label ng-hide="editing" ng-show="propertyName === 'name'" ng-click="editing = !editing">Description: {{data.Description}}</label>

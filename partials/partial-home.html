@@ -1,19 +1,21 @@
-
 <!-- Partial State for Home -->
+<div class="container-fluid text-center backpic w3-container w3-center w3-animate-opacity">
+<h1 class="mainH">ELITE 7</h1>
+<h4>-Property Management-</h4>
 
-<div class="container-fluid text-center">
-    <div class="row content">
+    <div class="row content searchBar">
         <div>
             <div class="container">
                 <form ng-submit="" class="input-group" name="searchForm">
-                    <input type="text" class="form-control"  placeholder="Search for...">
+                    <input type="text" class="form-control" ng-model="vm.cityName" placeholder="Search by City">
                     <span class="input-group-btn">
-            <a>
-               <button class="btn btn-secondary" type="button">Go!</button>
-            </a>
+               <button class="btn btn-secondary" ui-sref="home.result({cityName: vm.cityName})" ng-click="vm.searchProperties(vm.cityName)" type="button">Go!</button>
           </span>
                 </form>
+                <div ui-view></div>
             </div>
         </div>
+
     </div>
+
 </div>

@@ -5,23 +5,32 @@
         .module('app')
         .controller('PropertyController', PropertyController);
 
-    PropertyController.$inject = ['PropertyFactory'];
+    PropertyController.$inject = ['PropertyFactory', '$stateParams', 'localStorageService'];
 
     /* @ngInject */
-    function PropertyController(PropertyFactory) {
+    function PropertyController(PropertyFactory, $stateParams, localStorageService) {
         var vm = this;
         vm.title = 'PropertyController';
         vm.getProperties = getProperties;
         vm.addProperty = addProperty;
         vm.deleteProperty = deleteProperty;
         vm.editProperty = editProperty;
+        vm.searchProperties = searchProperties;
+        vm.searchPropertiesByUser = searchPropertiesByUser;
+        vm.username = localStorageService.get("username");
+
+        var cityName = $stateParams.cityName;
+
 
         activate();
 
         ////////////////
 
         function activate() {
-        	getProperties();
+            if (vm.username) {
+                searchPropertiesByUser(vm.username);
+            }
+            searchProperties($stateParams.cityName);
         }
 
         function getProperties() {
@@ -82,12 +91,54 @@
             return vm.properties.splice(index, 1);
 
         }
-         function editProperty(data) {
+        function editProperty(data) {
 
             PropertyFactory.editProperty(data)
                 .then(function(response) {
 
                         toastr.success('Properties Updated!');
+
+
+                    },
+                    function(error) {
+                        if (typeof error === 'object') {
+                            toastr.error('There was an error: ' + error.data);
+                        } else {
+                            toastr.info(error);
+                        }
+                    })
+        }
+
+        function searchProperties(cityName){
+
+        	var searchQuery = {city: cityName};
+
+        	PropertyFactory.searchProperties(searchQuery)
+                .then(function(response) {
+
+                    	vm.searchResults = (response.data);
+                        toastr.success('Properties Loaded!');
+
+
+                    },
+                    function(error) {
+                        if (typeof error === 'object') {
+                            toastr.error('There was an error: ' + error.data);
+                        } else {
+                            toastr.info(error);
+                        }
+                    })
+        }
+
+        function searchPropertiesByUser(userName){
+
+            var searchQuery = {userName: userName};
+
+            PropertyFactory.searchPropertiesByUser(searchQuery)
+                .then(function(response) {
+
+                        vm.properties = (response.data);
+                        toastr.success('Properties Loaded!');
 
 
                     },

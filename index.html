@@ -35,15 +35,26 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Forms<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="forms/propertymanagementagreementform.pdf">Property Manager Agreement</a></li>
+                            <li><a href="forms/resleaserentalagreementform.pdf">Lease Agreement</a></li>
+                            
+                        </ul>
+                    </li>
+                    <li ng-show="vm.userLoggedIn"><a ui-sref="dashboard" href="#">Dashboard</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" ui-sref="registration"><span class="glyphicon glyphicon-pencil"></span> Sign Up</a></li>
-                    <li>
+                    <li ng-hide="vm.userLoggedIn"><a href="#" ui-sref="registration"><span class="glyphicon glyphicon-pencil"></span> Sign Up</a></li>
+                    <li ng-hide="vm.userLoggedIn">
                         <a class="btn btn-default btn-outline btn-circle" data-toggle="collapse" href="#nav-collapse2" aria-expanded="false" aria-controls="nav-collapse2">Log in</a>
                     </li>
+                    <li ng-show="vm.userLoggedIn">
+                        <a class="btn btn-default btn-outline btn-circle" ng-click="vm.logoutUser()">Log out</a>
+                    </li>
                 </ul>
+
+
                 <div class="collapse nav navbar-nav nav-collapse" id="nav-collapse2">
                     <form class="navbar-form navbar-right form-inline" role="form">
                         <div class="form-group">
@@ -54,7 +65,7 @@
                             <label class="sr-only" for="Password">Password</label>
                             <input ng-model="vm.password" type="password" class="form-control" id="Password" placeholder="Password" required />
                         </div>
-                        <button ng-click="vm.loginUser(vm.username, vm.password)" type="submit" class="btn btn-success">Sign in</button>
+                        <button ng-click="vm.loginUser(vm.username, vm.password)" data-toggle="collapse" aria-expanded="false" data-target="#nav-collapse2" type="submit" class="btn btn-success">Sign in</button>
                     </form>
                 </div>
             </div>
@@ -63,12 +74,11 @@
 
     <!-- Anchor point for partial states -->
     <div ui-view></div>
-
     <footer class="container-fluid text-center">
         <p>&copy; Elite 7
         </p>
         <p>101 W. Broadway Ste #1125</p>
-        <p>San Diego, CA  92101</p>
+        <p>San Diego, CA 92101</p>
         <p>Phone:(555)555-5555</p>
     </footer>
     <!-- inject:js -->
@@ -82,4 +92,3 @@
 </body>
 
 </html>
-
