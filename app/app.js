@@ -25,7 +25,7 @@
         })
 
         .state('home.result', {
-                url: '/home.result/:cityName',
+                url: '/home.result/:cityName?:minRent?:maxRent?:bedrooms?:bathrooms',
                 templateUrl: '../partials/partial-home.result.html',
                 controller: 'PropertyController',
                 controllerAs: 'vm'
@@ -45,6 +45,7 @@
             controller: 'PropertyController',
             controllerAs: 'vm'
         })
-
     });
+app.value("apiUrl", "http://localhost:51146/api/");
+
 })();

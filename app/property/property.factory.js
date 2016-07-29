@@ -5,11 +5,11 @@
         .module('app')
         .factory('PropertyFactory', PropertyFactory);
 
-    PropertyFactory.$inject = ['$http', '$q', 'localStorageService'];
+    PropertyFactory.$inject = ['$http', '$q', 'localStorageService', 'apiUrl'];
 
     /* @ngInject */
-    function PropertyFactory($http, $q, localStorageService) {
-    	var url = 'http://localhost:51146/api/properties/'
+    function PropertyFactory($http, $q, localStorageService, apiUrl) {
+    	var url = apiUrl + 'properties/'
 
         var service = {
             getProperties: getProperties,

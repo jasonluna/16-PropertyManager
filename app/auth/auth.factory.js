@@ -5,10 +5,10 @@
         .module('app')
         .factory('AuthFactory', AuthFactory);
 
-    AuthFactory.$inject = ['$http', '$q', 'localStorageService'];
+    AuthFactory.$inject = ['$http', '$q', 'localStorageService', 'apiUrl'];
 
     /* @ngInject */
-    function AuthFactory($http, $q, localStorageService) {
+    function AuthFactory($http, $q, localStorageService, apiUrl) {
         var service = {
             registerUser: registerUser,
             loginUser: loginUser,
@@ -32,7 +32,7 @@
 
             $http({
                     method: 'POST',
-                    url: 'http://localhost:51146/api/accounts/register',
+                    url: apiUrl + 'accounts/register',
                     headers: {
                         'Content-Type': 'application/json; charset=utf-8'
                     },
@@ -58,7 +58,7 @@
 
             $http({
                     method: 'POST',
-                    url: 'http://localhost:51146/api/token',
+                    url: apiUrl + 'token',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },

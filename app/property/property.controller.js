@@ -19,7 +19,18 @@
         vm.searchPropertiesByUser = searchPropertiesByUser;
         vm.username = localStorageService.get("username");
 
-        var cityName = $stateParams.cityName;
+        vm.cityName = "";
+        vm.minRent = 0;
+        vm.maxRent = 0;
+        vm.bedrooms = 0;
+        vm.bathrooms = 0;
+
+        vm.cityName = $stateParams.cityName;
+        vm.minRent = $stateParams.minRent;
+        vm.maxRent = $stateParams.maxRent;
+        vm.bedrooms = $stateParams.bedrooms;
+        vm.bathrooms = $stateParams.bathrooms;
+
 
 
         activate();
@@ -30,7 +41,7 @@
             if (vm.username) {
                 searchPropertiesByUser(vm.username);
             }
-            searchProperties($stateParams.cityName);
+            searchProperties(vm.cityName, vm.minRent, vm.maxRent, vm.bedrooms, vm.bathrooms);
         }
 
         function getProperties() {
@@ -52,12 +63,12 @@
                     })
         }
 
-         function addProperty(city,zip,street,squareft,bedrooms,bathrooms,rent,description) {
+        function addProperty(city, zip, street, squareft, bedrooms, bathrooms, rent, description) {
 
-            PropertyFactory.addProperty(city,zip,street,squareft,bedrooms,bathrooms,rent,description)
+            PropertyFactory.addProperty(city, zip, street, squareft, bedrooms, bathrooms, rent, description)
                 .then(function(response) {
 
-                    	vm.properties.push(response.data);
+                        vm.properties.push(response.data);
                         toastr.success('Properties Loaded!');
 
 
@@ -91,6 +102,7 @@
             return vm.properties.splice(index, 1);
 
         }
+
         function editProperty(data) {
 
             PropertyFactory.editProperty(data)
@@ -109,14 +121,14 @@
                     })
         }
 
-        function searchProperties(cityName){
+        function searchProperties(cityName, minRent, maxRent, bedrooms, bathrooms) {
 
-        	var searchQuery = {city: cityName};
+            var searchQuery = { city: cityName, minRent: minRent, maxRent: maxRent, bedrooms: bedrooms, bathrooms: bathrooms };
 
-        	PropertyFactory.searchProperties(searchQuery)
+            PropertyFactory.searchProperties(searchQuery)
                 .then(function(response) {
 
-                    	vm.searchResults = (response.data);
+                        vm.searchResults = (response.data);
                         toastr.success('Properties Loaded!');
 
 
@@ -130,9 +142,9 @@
                     })
         }
 
-        function searchPropertiesByUser(userName){
+        function searchPropertiesByUser(userName) {
 
-            var searchQuery = {userName: userName};
+            var searchQuery = { userName: userName };
 
             PropertyFactory.searchPropertiesByUser(searchQuery)
                 .then(function(response) {

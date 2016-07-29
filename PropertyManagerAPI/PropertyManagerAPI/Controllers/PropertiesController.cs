@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using PropertyManagerAPI.Infrastructure;
 using PropertyManagerAPI.Models;
+using System;
 
 namespace PropertyManagerAPI.Controllers
 {  
@@ -37,7 +38,33 @@ namespace PropertyManagerAPI.Controllers
         [Route("api/properties/search")]
         public IQueryable<Property> SearchProperties(SearchQuery search)
         {
-            IQueryable<Property> properties = db.Properties.Where(p => p.City == search.City);
+            IQueryable<Property> properties = db.Properties;
+            if (!String.IsNullOrEmpty(search.City))
+            {
+                properties = properties.Where(p => p.City == search.City);
+            }
+
+            if (search.MinRent > 0 && search.MinRent != null)
+            {
+                properties = properties.Where(p => p.Rent >= search.MinRent);
+            }
+
+            if (search.MaxRent > 0 && search.MaxRent != null)
+            {
+                properties = properties.Where(p => p.Rent <= search.MaxRent);
+            }
+
+            if (search.Bedrooms > 0 && search.Bedrooms != null)
+            {
+                properties = properties.Where(p => p.Bedrooms >= search.Bedrooms);
+            }
+
+            if (search.Bathrooms > 0 && search.Bathrooms != null)
+            {
+                properties = properties.Where(p => p.Bathrooms >= search.Bathrooms);
+            }
+
+
             return properties;
         }
 
