@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
+﻿
 namespace PropertyManagerAPI.Models
 {
     public class Property
     {
-       
             //Primary key
             public int PropertyId { get; set; }
 
@@ -24,8 +19,6 @@ namespace PropertyManagerAPI.Models
             public double Rent { get; set; }
             public string Description { get; set; }
             
-
-
             //Entity relationships
             public virtual PropertyManagerUser User { get; set; }
             

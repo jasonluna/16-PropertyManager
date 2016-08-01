@@ -1,3 +1,6 @@
+
+//Creating AuthFactory to handle user authentication related services
+
 (function() {
     'use strict';
 
@@ -18,6 +21,7 @@
 
         ////////////////
 
+        //Checks user confirm password and then uses POST HTTP call to register user in database
         function registerUser(userEmail, password, confirmPassword, firstName, lastName, phoneNumber) {
 
             var defer = $q.defer();
@@ -51,6 +55,7 @@
                 return defer.promise;
         }
 
+        //Uses POST HTTP call to send login information to server and return authentication token
         function loginUser(loginEmail, loginPassword){
             var defer = $q.defer();
 
@@ -66,6 +71,7 @@
                 }).then(function(response) {
                         if (response.status === 200) {
 
+                            //Stores access token and username on successful login
                             localStorageService.set('access_token', response.data.access_token);
                             localStorageService.set('username', loginEmail);
 
@@ -82,7 +88,6 @@
         }
 
         //Defining method for logging users out by clearing out access token from local storage
-        
         function logoutUser(){
             localStorageService.clearAll();
 

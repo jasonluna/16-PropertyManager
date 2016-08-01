@@ -1,3 +1,6 @@
+
+/* Styles for main page */
+
 h1 {
     text-align: center;
 }
@@ -6,10 +9,10 @@ h1 {
     text-align: center;
 }
 
-.searchBar{
+.searchBar {
     margin-top: 5%;
-
 }
+
 
 /* Remove the navbar's default margin-bottom and rounded borders */
 
@@ -42,7 +45,6 @@ footer {
     color: white;
     padding: 15px;
     display: block;
-    
 }
 
 
@@ -57,6 +59,7 @@ footer {
         height: auto;
     }
 }
+
 
 /* Log in button drop down */
 
@@ -135,36 +138,34 @@ footer {
     }
 }
 
-/*.propertyDisplay{
+/* Styles for search results */
 
-    margin-left: 0;
-
-}*/
-
-.searchResult{
+.searchResult {
     text-align: center;
 }
-.resultsContainer{
+
+.resultsContainer {
     margin-top: 5%;
 }
 
-/*.panel{
-    width: 40%;
-    display: inline;
-}*/
-.propertyPic{
+/* Styles for pictures in search results */
+
+.propertyPic {
     height: 200px;
     width: 250px;
     max-width: 100%;
-
 }
 
-.backpic{
+/* Styles for backgorund image */
+
+.backpic {
     background-image: url(../../img/house-images-17.jpg);
     background-size: cover;
 }
 
-.mainH{
+/* Styles for main header */
+
+.mainH {
     color: white;
     font: bolder;
 }

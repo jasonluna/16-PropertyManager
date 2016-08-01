@@ -22,6 +22,7 @@
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
     <!-- endbower -->
+    <!-- NavBar -->
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -38,23 +39,24 @@
                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Forms<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a target="_blank" href="forms/propertymanagementagreementform.pdf">Property Manager Agreement</a></li>
-                            <li><a href="forms/resleaserentalagreementform.pdf">Lease Agreement</a></li>
-                            
+                            <li><a target="_blank" href="forms/resleaserentalagreementform.pdf">Lease Agreement</a></li>
                         </ul>
                     </li>
+                    <!-- Dashboard button only shows when user is logged in -->
                     <li ng-show="vm.userLoggedIn"><a ui-sref="dashboard" href="#">Dashboard</a></li>
                 </ul>
+                <!-- Hides sign up and log in buttons when user logged in -->
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-hide="vm.userLoggedIn"><a href="#" ui-sref="registration"><span class="glyphicon glyphicon-pencil"></span> Sign Up</a></li>
                     <li ng-hide="vm.userLoggedIn">
                         <a class="btn btn-default btn-outline btn-circle" data-toggle="collapse" href="#nav-collapse2" aria-expanded="false" aria-controls="nav-collapse2">Log in</a>
                     </li>
+                    <!-- Shows logout button when user logged in -->
                     <li ng-show="vm.userLoggedIn">
                         <a class="btn btn-default btn-outline btn-circle" ng-click="vm.logoutUser()">Log out</a>
                     </li>
                 </ul>
-
-
+                <!-- Dropdown login form -->
                 <div class="collapse nav navbar-nav nav-collapse" id="nav-collapse2">
                     <form class="navbar-form navbar-right form-inline" role="form">
                         <div class="form-group">
@@ -71,7 +73,6 @@
             </div>
         </div>
     </nav>
-
     <!-- Anchor point for partial states -->
     <div ui-view></div>
     <footer class="container-fluid text-center">

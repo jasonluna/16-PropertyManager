@@ -1,3 +1,6 @@
+
+//Creating Auth Controller to pass user inputs to Auth factory
+
 (function() {
     'use strict';
 
@@ -16,17 +19,17 @@
         vm.logoutUser = logoutUser;
         vm.username = localStorageService.get("username");
 
-
-            if (vm.username) {
-                vm.userLoggedIn = true;
-            }
+        //Checks to see if there is a stored username, if yes sets login status to true
+        if (vm.username) {
+            vm.userLoggedIn = true;
+        }
         activate();
 
         ////////////////
 
-        function activate() {
-        }
+        function activate() {}
 
+        //Creating function to call AuthFactory to register new users
         function registerUser(email, password, confirmPassword, firstName, lastName, phoneNumber) {
             AuthFactory.registerUser(email, password, confirmPassword, firstName, lastName, phoneNumber).then(function(response) {
 
@@ -51,7 +54,8 @@
                 });
         }
 
-         function loginUser(loginEmail, loginPassword) {
+        //Creating function to call login user from AuthFactory and store login status
+        function loginUser(loginEmail, loginPassword) {
             logoutUser();
             AuthFactory.loginUser(loginEmail, loginPassword).then(function(response) {
                     vm.userLoggedIn = true;
@@ -73,9 +77,9 @@
                 });
         }
 
-        //Defining logoutUser to call logoutUser method in AuthorizationFactory and redirect user to login page upon clearing access_token from local storage
+        //Defining logoutUser to call logoutUser method in AuthFactory and redirect user to home pageupon clearing access_token from local storage
         function logoutUser() {
-            vm.userLoggedIn= false;
+            vm.userLoggedIn = false;
             AuthFactory.logoutUser();
             $state.go('home');
         }

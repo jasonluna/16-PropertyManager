@@ -34,10 +34,11 @@ namespace PropertyManagerAPI.Controllers
             return Ok(property);
         }
 
-        //POST: api/Properties/City
+        //POST: api/Properties/Search
         [Route("api/properties/search")]
         public IQueryable<Property> SearchProperties(SearchQuery search)
         {
+            //Building SQL query based on null values in SearchQuery object
             IQueryable<Property> properties = db.Properties;
             if (!String.IsNullOrEmpty(search.City))
             {
@@ -64,7 +65,7 @@ namespace PropertyManagerAPI.Controllers
                 properties = properties.Where(p => p.Bathrooms >= search.Bathrooms);
             }
 
-
+            //Returns results of search query
             return properties;
         }
 
@@ -72,9 +73,11 @@ namespace PropertyManagerAPI.Controllers
         [Route("api/properties/search/username")]
         public IQueryable<Property> SearchPropertiesByUser(SearchQuery search)
         {
+            //Finding user that matches SearchQuery's username
             string username = search.UserName;
             var user = db.Users.FirstOrDefault(u => u.UserName == username);
             
+            //Returns all properties that have associated username's userId
             IQueryable<Property> properties = db.Properties.Where(p => p.UserId == user.Id);
             return properties;
         }

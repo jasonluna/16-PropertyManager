@@ -1,3 +1,6 @@
+
+//Creating module to route urls and initialize localStorage
+
 (function() {
     'use strict';
 
@@ -6,11 +9,6 @@
     app.config(function(localStorageServiceProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
 
         $httpProvider.interceptors.push('AuthInterceptor');
-
-        // localStorageServiceProvider
-        //     .setPrefix('app')
-        //     .setStorageType('localStorage')
-        //     .setNotify(true, true)
 
         $urlRouterProvider.otherwise('/home');
 
@@ -46,6 +44,8 @@
             controllerAs: 'vm'
         })
     });
+
+//Global variable 
 app.value("apiUrl", "http://localhost:51146/api/");
 
 })();

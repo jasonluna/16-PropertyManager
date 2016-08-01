@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
+﻿
 namespace PropertyManagerAPI.Models
 {
     public class SearchQuery
     {
+        //Building SearchQuery model to accept these search terms
         public string UserName { get; set; }
         public string City { get; set; }
         public int? Zip { get; set; }
